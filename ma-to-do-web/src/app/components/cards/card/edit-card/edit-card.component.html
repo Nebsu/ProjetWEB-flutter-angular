@@ -1,0 +1,14 @@
+<form>
+    <div class="mb-3">
+        <label for="title" class="form-label">Titre</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="cardEdit.title" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">Contenu</label>
+        <textarea class="form-control" id="content" [(ngModel)]="cardEdit.content" [ngModelOptions]="{standalone: true}"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="dueDate" class="form-label">Date de rendu</label>
+        <input type="date" class="form-control" id="dueDate" [(ngModel)]="date" [ngModelOptions]="{standalone: true}">
+    </div>
+</form>
