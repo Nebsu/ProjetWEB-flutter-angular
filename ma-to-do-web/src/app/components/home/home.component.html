@@ -1,0 +1,8 @@
+<p>home works!</p>
+<ul>
+    @for (item of items$ | async; track $index) {
+        <li>{{ item.completed }}</li>
+    }
+</ul>
+<button (click)="onClick()">Button</button>
+<button (click)="update()">update</button>
