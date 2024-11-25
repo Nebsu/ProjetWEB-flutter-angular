@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, doc, Firestore, Timestamp, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Todo } from '../../models/todo.model';
 
@@ -17,10 +17,10 @@ export class FireService {
 
   putItem(title: string): void {
     const itemCollection = collection(this.fireStore, 'todo');
-    const item: Todo = {
+    const item: Partial<Todo> = {
       completed: false,
       content: '',
-      creationDate: new Date(),
+      creationDate: Timestamp.now(),
       title
     }
     addDoc(itemCollection, item);
@@ -28,6 +28,9 @@ export class FireService {
 
   updateItem(id: string, data: Partial<Todo>): Promise<void> {
     const itemDoc = doc(this.fireStore, `todo/${id}`);
+    console.log(itemDoc);
+    console.log(data);
+    
     return updateDoc(itemDoc, data);
   }
   

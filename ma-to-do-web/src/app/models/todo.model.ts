@@ -1,7 +1,10 @@
+import { Timestamp } from "@angular/fire/firestore";
+
 export interface Todo {
+    id: string;
     completed: boolean;
     content: string;
-    creationDate: Date;
-    dueDate?: Date;
+    creationDate: Timestamp;
+    dueDate?: Timestamp;
     title: string;
 }

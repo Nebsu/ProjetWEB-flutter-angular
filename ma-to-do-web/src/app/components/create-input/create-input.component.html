@@ -1,1 +1,8 @@
-<p>create-input works!</p>
+<form (ngSubmit)="addTodo()" class="d-flex justify-content-center">
+    <div class="input-group mb-3" style="width: 80%;">
+      <input type="text" class="form-control" placeholder="Titre de la tâche" [(ngModel)]="newTodoTitle" name="title" required>
+      <div class="input-group-append">
+        <button class="btn btn-success" type="submit">Créer</button>
+      </div>
+    </div>
+  </form>

@@ -1,8 +1,13 @@
-<p>home works!</p>
-<ul>
-    @for (item of items$ | async; track $index) {
-        <li>{{ item.completed }}</li>
-    }
-</ul>
-<button (click)="onClick()">Button</button>
-<button (click)="update()">update</button>
+<div class="container mt-4 d-flex justify-content-center">
+  <div class="card shadow-sm" style="width: 50%;">
+    <div class="card-header text-white" style="background-color: #6c757d;">
+      <h2 class="mb-0 text-center">titre</h2>
+    </div>
+    <div class="card-body">
+      <p class="card-text text-center">description</p>
+      <app-create-input></app-create-input>
+      <hr>
+      <app-cards></app-cards>
+    </div>
+  </div>
+</div>
