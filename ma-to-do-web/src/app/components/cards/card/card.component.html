@@ -26,15 +26,15 @@
       </div>
     </ng-template>
 
-    <p class="card-text">{{ card.content }}</p>
     <p class="card-text">
       <small class="text-muted">Créé le : {{ card.creationDate.toDate() | date:'dd-MM-yyyy' }}</small>
       <br>
       @if (card.dueDate) {
         <small class="text-muted">À rendre le : {{ card.dueDate.toDate() | date:'dd-MM-yyyy' }}</small>
-
+        
       }
     </p>
+    <p class="card-text">{{ card.content }}</p>
     <div class="form-check">
       <input class="form-check-input" type="checkbox" [(ngModel)]="card.completed" (change)="toggleCompleted()">
       <label class="form-check-label">Terminé</label>

@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { Todo } from '../../models/todo.model';
 import { AsyncPipe } from '@angular/common';
 import { CardComponent } from "./card/card.component";
+import { SortTodoPipe } from "../../pipes/sort-todo.pipe";
 
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [AsyncPipe, CardComponent],
+  imports: [AsyncPipe, CardComponent, SortTodoPipe],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss'
 })
