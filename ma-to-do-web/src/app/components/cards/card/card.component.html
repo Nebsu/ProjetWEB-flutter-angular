@@ -31,7 +31,6 @@
       <br>
       @if (card.dueDate) {
         <small class="text-muted">À rendre le : {{ card.dueDate.toDate() | date:'dd-MM-yyyy' }}</small>
-        
       }
     </p>
     <p class="card-text">{{ card.content }}</p>
