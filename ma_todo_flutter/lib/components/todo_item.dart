@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -22,6 +24,15 @@ class _TodoItemState extends State<TodoItem> {
       widget.todo['completed'],
     );
   }
+
+  bool _isExpired() {
+    if (widget.todo['dueDate'] != null) {
+      if(widget.todo['dueDate'].compareTo(Timestamp.now()) == -1){
+        return true;
+      }
+    }
+    return false;
+  } 
 
   void _editTodo() {
     TextEditingController titleController = TextEditingController(text: widget.todo['title']);
@@ -129,6 +140,9 @@ class _TodoItemState extends State<TodoItem> {
                 decoration: widget.todo['completed']
                     ? TextDecoration.lineThrough
                     : TextDecoration.none,
+                decorationColor: _isExpired()
+                    ? Colors.red
+                    : Colors.amber,
               ),
             ),
             Text('Créé le: $creationDate'),
