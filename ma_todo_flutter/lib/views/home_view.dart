@@ -7,7 +7,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ma Todo Flutter'),
+        title: Text('TOUT DOUX LISTE'),
       ),
       body: Column(
         children: <Widget>[

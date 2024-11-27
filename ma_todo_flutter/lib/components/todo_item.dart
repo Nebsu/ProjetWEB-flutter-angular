@@ -123,6 +123,11 @@ class _TodoItemState extends State<TodoItem> {
 
     return Container(
       decoration: BoxDecoration(
+        color: widget.todo['completed']
+            ? Color.fromARGB(255, 152, 255, 152)
+            : _isExpired()
+                ? const Color.fromARGB(255, 255, 149, 149)
+                : const Color.fromARGB(255, 255, 228, 138),
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -147,7 +152,8 @@ class _TodoItemState extends State<TodoItem> {
             ),
             Text('Créé le: $creationDate'),
             if (dueDate != null)
-              Text('Date d\'échéance: $dueDate'),
+              Text('Pour le: $dueDate \n'),
+
             if (widget.todo['content'] != null)
               Text(widget.todo['content']),
           ],
