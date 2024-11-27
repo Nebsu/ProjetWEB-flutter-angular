@@ -1,7 +1,11 @@
 .CardCompleted{
-    background-color: green;
+    background-color: rgb(152, 255, 152);
 }
 
 .CardExpired{
-    background-color: red;
+    background-color: rgb(255, 149, 149);
+}
+
+.CardInProgress{
+    background-color: rgb(255, 228, 138);
 }
