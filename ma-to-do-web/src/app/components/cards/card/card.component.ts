@@ -1,22 +1,37 @@
-import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { Todo } from '../../../models/todo.model';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FireService } from '../../../core/services/fire.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EditCardComponent } from "./edit-card/edit-card.component";
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [DatePipe, FormsModule, EditCardComponent],
+  imports: [DatePipe, FormsModule, EditCardComponent, NgClass],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
-export class CardComponent {
+export class CardComponent implements OnInit, OnChanges{
   @Input() card!: Todo;
 
   constructor(private fireService: FireService, private ngbModal: NgbModal) {}
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("BBBBBBBBB");
+    if(this.card.dueDate) {
+      this.card.expired = this.card.dueDate.toDate() < Timestamp.now().toDate();
+    }
+  }
+
+  ngOnInit(): void {
+    console.log("AAAAAAAAA");
+    if(this.card.dueDate) {
+      this.card.expired = this.card.dueDate.toDate() < Timestamp.now().toDate();
+    }
+  }
 
   toggleCompleted() {
     this.fireService.updateItem(this.card.id, { completed: this.card.completed });

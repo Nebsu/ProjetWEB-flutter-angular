@@ -19,6 +19,7 @@ export class FireService {
     const itemCollection = collection(this.fireStore, 'todo');
     const item: Partial<Todo> = {
       completed: false,
+      expired: false,
       content: '',
       creationDate: Timestamp.now(),
       title
