@@ -1,16 +1,30 @@
-<div class="card mb-3">
-  <div class="card-body" [ngClass]="{'CardCompleted': card.completed, 'CardExpired': card.expired&&!card.completed, 'CardInProgress': !card.expired&&!card.completed}">
-    <h5 class="card-title d-flex justify-content-between align-items-center">
+<div class="card">
+  <div class="card-body" (click)="toggleExpand()" [ngClass]="{'CardCompleted': card.completed, 'CardExpired': card.expired&&!card.completed, 'CardInProgress': !card.expired&&!card.completed, 'CardExpanded' : isExpanded}">
+    <h5 class="card-title">
       {{ card.title }}
-      <div>
-        <button class="btn btn-outline-secondary btn-sm me-2" (click)="openModal(content)">
+      <div class="buttons">
+        <button class="btn" (click)="openModal(content)">
           <i class="bi bi-pencil"></i>
         </button>
-        <button class="btn btn-outline-danger btn-sm" (click)="deleteTodo()">
+        <button class="btn" (click)="deleteTodo()">
           <i class="bi bi-trash"></i>
         </button>
+        <div class="checkbox-wrapper-18">
+          <div class="round">
+            <input type="checkbox" [id]="'checkbox-' + card.id" [ngClass]="{'CheckedButton': card.completed}" [(ngModel)]="card.completed" (change)="toggleCompleted()" />
+            <label [for]="'checkbox-' + card.id"></label>
+          </div>
+        </div>
       </div>
     </h5>
+    <p class="card-text">
+      <small class="text-muted">Créé le : {{ card.creationDate.toDate() | date:'dd-MM-yyyy' }}</small>
+      <br>
+      @if (card.dueDate) {
+        <small class="text-muted">Pour le : {{ card.dueDate.toDate() | date:'dd-MM-yyyy' }}</small>
+      }
+    </p>
+    <p class="card-text">{{ card.content }}</p>
 
     <!-- Modal -->
     <ng-template #content let-modal>
@@ -25,24 +39,6 @@
         <button type="button" class="btn btn-outline-secondary" (click)="saveChanges(editCard, modal)">Save</button>
       </div>
     </ng-template>
-
-    <p class="card-text">
-      <small class="text-muted">Créé le : {{ card.creationDate.toDate() | date:'dd-MM-yyyy' }}</small>
-      <br>
-      @if (card.dueDate) {
-        <small class="text-muted">À rendre le : {{ card.dueDate.toDate() | date:'dd-MM-yyyy' }}</small>
-      }
-    </p>
-    <p class="card-text">{{ card.content }}</p>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" [ngClass]="{'CheckedButton': card.completed}" [(ngModel)]="card.completed" (change)="toggleCompleted()">
-      <label class="form-check-label" for="flexCheckDefault">
-        Terminé
-      </label>
-    </div>
-    <!-- <div class="checkbox-wrapper-19">
-      <input type="checkbox" [id]="'cbtest-' + card.id" [(ngModel)]="card.completed" (change)="toggleCompleted()" />
-      <label [for]="'cbtest-' + card.id" class="check-box"></label>
-    </div> -->
+   
   </div>
 </div>

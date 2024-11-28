@@ -16,8 +16,13 @@ import { Timestamp } from '@angular/fire/firestore';
 })
 export class CardComponent implements OnInit, OnChanges{
   @Input() card!: Todo;
+  isExpanded = false;
 
   constructor(private fireService: FireService, private ngbModal: NgbModal) {}
+
+  toggleExpand() {
+    this.isExpanded = !this.isExpanded;
+  }
   
   ngOnChanges(changes: SimpleChanges): void {
     console.log("BBBBBBBBB");
