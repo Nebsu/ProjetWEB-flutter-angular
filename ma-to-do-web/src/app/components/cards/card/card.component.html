@@ -1,14 +1,11 @@
 <div class="card">
   <div class="card-body" (click)="toggleExpand()" [ngClass]="{'CardCompleted': card.completed, 'CardExpired': card.expired&&!card.completed, 'CardInProgress': !card.expired&&!card.completed, 'CardExpanded' : isExpanded}">
-    <h5 class="card-title">
+    <div class="card-title">
       {{ card.title }}
-      <div class="buttons">
-        <button class="btn" (click)="openModal(content)">
-          <i class="bi bi-pencil"></i>
-        </button>
-        <button class="btn" (click)="deleteTodo()">
-          <i class="bi bi-trash"></i>
-        </button>
+      <div class="right-title">
+        @if (card.dueDate) {
+          <small class="dueDate">Pour le : {{ card.dueDate.toDate() | date:'dd-MM-yyyy' }}</small>
+        }
         <div class="checkbox-wrapper-18">
           <div class="round">
             <input type="checkbox" [id]="'checkbox-' + card.id" [ngClass]="{'CheckedButton': card.completed}" [(ngModel)]="card.completed" (change)="toggleCompleted()" />
@@ -16,18 +13,27 @@
           </div>
         </div>
       </div>
-    </h5>
-    <p class="card-text">
-      <small class="text-muted">Créé le : {{ card.creationDate.toDate() | date:'dd-MM-yyyy' }}</small>
-      <br>
-      @if (card.dueDate) {
-        <small class="text-muted">Pour le : {{ card.dueDate.toDate() | date:'dd-MM-yyyy' }}</small>
-      }
-    </p>
-    <p class="card-text">{{ card.content }}</p>
+    </div>
+
+
+    <div class="details">
+      <p class="content">{{ card.content }}</p>
+      <p class="create-date">
+        <small class="text-muted">Créé le : {{ card.creationDate.toDate() | date:'dd-MM-yyyy' }}</small>
+      </p>
+      <div class="buttons">
+        <button class="btn" (click)="openModal(content)">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button class="btn" (click)="deleteTodo()">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+
 
     <!-- Modal -->
-    <ng-template #content let-modal>
+    <ng-template class="modal" #content let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Modifier la tâche</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
