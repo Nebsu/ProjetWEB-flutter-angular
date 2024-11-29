@@ -1,19 +1,39 @@
-<div class="card mb-3">
-  <div class="card-body" [ngClass]="{'CardCompleted': card.completed, 'CardExpired': card.expired&&!card.completed, 'CardInProgress': !card.expired&&!card.completed}">
-    <h5 class="card-title d-flex justify-content-between align-items-center">
+<div class="card">
+  <div class="card-body" (click)="toggleExpand()" [ngClass]="{'CardCompleted': card.completed, 'CardExpired': card.expired&&!card.completed, 'CardInProgress': !card.expired&&!card.completed, 'CardExpanded' : isExpanded}">
+    <div class="card-title">
       {{ card.title }}
-      <div>
-        <button class="btn btn-outline-secondary btn-sm me-2" (click)="openModal(content)">
+      <div class="right-title">
+        @if (card.dueDate) {
+          <small class="dueDate">Pour le : {{ card.dueDate.toDate() | date:'dd-MM-yyyy' }}</small>
+        }
+        <div class="checkbox-wrapper-18">
+          <div class="round">
+            <input type="checkbox" [id]="'checkbox-' + card.id" [ngClass]="{'CheckedButton': card.completed}" [(ngModel)]="card.completed" (change)="toggleCompleted()" />
+            <label [for]="'checkbox-' + card.id"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="details">
+      <p class="content">{{ card.content }}</p>
+      <p class="create-date">
+        <small class="text-muted">Créé le : {{ card.creationDate.toDate() | date:'dd-MM-yyyy' }}</small>
+      </p>
+      <div class="buttons">
+        <button class="btn" (click)="openModal(content)">
           <i class="bi bi-pencil"></i>
         </button>
-        <button class="btn btn-outline-danger btn-sm" (click)="deleteTodo()">
+        <button class="btn" (click)="deleteTodo()">
           <i class="bi bi-trash"></i>
         </button>
       </div>
-    </h5>
+    </div>
+
 
     <!-- Modal -->
-    <ng-template #content let-modal>
+    <ng-template class="modal" #content let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Modifier la tâche</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
@@ -25,20 +45,6 @@
         <button type="button" class="btn btn-outline-secondary" (click)="saveChanges(editCard, modal)">Save</button>
       </div>
     </ng-template>
-
-    <p class="card-text">
-      <small class="text-muted">Créé le : {{ card.creationDate.toDate() | date:'dd-MM-yyyy' }}</small>
-      <br>
-      @if (card.dueDate) {
-        <small class="text-muted">À rendre le : {{ card.dueDate.toDate() | date:'dd-MM-yyyy' }}</small>
-      }
-    </p>
-    <p class="card-text">{{ card.content }}</p>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" [ngClass]="{'CheckedButton': card.completed}" [(ngModel)]="card.completed" (change)="toggleCompleted()">
-      <label class="form-check-label" for="flexCheckDefault">
-        Terminé
-      </label>
-    </div>
+   
   </div>
 </div>
