@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .card-header {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -12,3 +14,9 @@
   margin-right: auto;
 }
 
+.titre{
+  text-align: center;
+  padding: 50px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 10vh;
+}

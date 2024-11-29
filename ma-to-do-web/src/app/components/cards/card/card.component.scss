@@ -4,26 +4,35 @@
   border-radius: 20px;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+}
+
+.card{
+  margin-bottom: 20px;
+  // backgrounf transparent
+  background-color: rgba(255, 255, 255, 0.0);
+  border: none;
 }
 
 .CardExpanded {
   height: 500px;
 }
 
-.card {
-  border: none;
-}
 
 .CardCompleted {
   background-color: rgb(152, 255, 152);
+  border-radius: 20px;
 }
 
 .CardExpired {
   background-color: rgb(255, 149, 149);
+  border-radius: 20px;
 }
 
 .CardInProgress {
   background-color: rgb(244, 244, 244);
+  border-radius: 20px;
 }
 
 .card-title{
