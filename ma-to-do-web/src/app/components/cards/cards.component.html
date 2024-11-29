@@ -1,3 +1,12 @@
-@for (item of items$ | async | sortTodo; track $index) {
-    <app-card [card]="item"></app-card>
+@if(items$ | async; as items) {
+    @for (item of items | sortTodo; track $index) {
+        <app-card [card]="item"></app-card>
+    }
+}
+@else {
+    <div class="d-flex justify-content-center my-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
 }

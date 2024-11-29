@@ -20,14 +20,14 @@ export class CardComponent implements OnInit, OnChanges{
   constructor(private fireService: FireService, private ngbModal: NgbModal) {}
   
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("BBBBBBBBB");
-    if(this.card.dueDate) {
-      this.card.expired = this.card.dueDate.toDate() < Timestamp.now().toDate();
-    }
+    this.updateComponent();
   }
 
   ngOnInit(): void {
-    console.log("AAAAAAAAA");
+    this.updateComponent();
+  }
+  
+  updateComponent() {
     if(this.card.dueDate) {
       this.card.expired = this.card.dueDate.toDate() < Timestamp.now().toDate();
     }

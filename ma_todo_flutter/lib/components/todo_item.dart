@@ -127,56 +127,73 @@ class _TodoItemState extends State<TodoItem> {
             ? Color.fromARGB(255, 152, 255, 152)
             : _isExpired()
                 ? const Color.fromARGB(255, 255, 149, 149)
-                : const Color.fromARGB(255, 255, 228, 138),
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(8.0),
+                : const Color.fromARGB(255, 245, 245, 245),
+        border: Border.all(color: Colors.white),
+        borderRadius: BorderRadius.circular(20.0),
       ),
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 50.0),
       padding: EdgeInsets.all(8.0),
-      child: ListTile(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.todo['title'] ?? 'Titre ',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                decoration: widget.todo['completed']
-                    ? TextDecoration.lineThrough
-                    : TextDecoration.none,
-                decorationColor: _isExpired()
-                    ? Colors.red
-                    : Colors.amber,
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 20.0), // Ajoute une marge supérieure de 8.0
+                  child: Text(
+                    widget.todo['title'] ?? 'Titre ',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      decorationColor: _isExpired()
+                          ? Colors.red
+                          : Colors.amber,
+                    ),
+                  ),
+                ),
+              
+                if (widget.todo['content'] != null)
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0, bottom: 10), // Ajoute une marge supérieure de 8.0
+                  child: Text(widget.todo['content']),
+                ),
+                  
+              ],
             ),
-            Text('Créé le: $creationDate'),
-            if (dueDate != null)
-              Text('Pour le: $dueDate \n'),
-
-            if (widget.todo['content'] != null)
-              Text(widget.todo['content']),
-          ],
-        ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: _editTodo,
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: _editTodo,
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: _deleteTodo,
+                ),
+              ],
             ),
-            IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: _deleteTodo,
+            leading: Checkbox(
+              value: widget.todo['completed'],
+              activeColor: Colors.green,
+              onChanged: (value) {
+                _toggleComplete();
+              },
             ),
-          ],
-        ),
-        leading: Checkbox(
-          value: widget.todo['completed'],
-          onChanged: (value) {
-            _toggleComplete();
-          },
-        ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 20, left: 20),
+            child: Text('Créé le: $creationDate'),
+          ),
+          if (widget.todo['dueDate'] != null)
+            Padding(
+              padding: EdgeInsets.only(bottom:  20.0, right: 20), // Ajoute une marge supérieure de 8.0
+              child: Text('Pour le: $dueDate'),
+            ),
+        ],
       ),
     );
   }

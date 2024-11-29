@@ -20,7 +20,7 @@ class _TodoCreationBarState extends State<TodoCreationBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(50.0),
       child: Row(
         children: <Widget>[
           Expanded(
