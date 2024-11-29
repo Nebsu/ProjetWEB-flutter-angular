@@ -10,4 +10,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'ma-to-do-web';
+
+  toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
 }

@@ -20,3 +20,13 @@
   font-family: "Bebas Neue", sans-serif;
   font-size: 10vh;
 }
+
+.card-header {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.card-body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}

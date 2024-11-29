@@ -9,3 +9,19 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/* src/styles.scss */
+:root {
+    --background-color: white;
+    --text-color: black;
+  }
+  
+  .dark-mode {
+    --background-color: #121212;
+    --text-color: white;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
